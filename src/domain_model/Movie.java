@@ -1,3 +1,5 @@
+package domain_model;
+
 import java.util.List;
 
 public class Movie {
@@ -85,7 +87,7 @@ public class Movie {
                 "Year: " + year,
                 "Length: " + lengthInMinutes,
                 "Genre: " + genre,
-                "Movie ID: " + movieID,
+                "domain_model.Movie ID: " + movieID,
                 "Is in color: "));
 
         if (isInColor) {

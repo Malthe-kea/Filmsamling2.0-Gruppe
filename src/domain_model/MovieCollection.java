@@ -1,10 +1,11 @@
+package domain_model;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class MovieCollection {
 
-    ArrayList<Movie> movieListArr = new ArrayList<>();
-    Scanner userInput = new Scanner(System.in);
+    public ArrayList<Movie> movieListArr = new ArrayList<>();
 
 
     public void addMovie (Movie movie) {

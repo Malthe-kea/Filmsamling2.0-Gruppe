@@ -1,3 +1,6 @@
+package ui;
+import domain_model.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -126,7 +129,7 @@ public class UserInterface {
             if (movieCollectionArr.getMovieListArr().isEmpty()) {
                 noMoviesOnList();
             } else if (m.getMovieID().contains(searchNumber)) {
-                System.out.println("Movie found! Please enter the new information for the movie");
+                System.out.println("domain_model.Movie found! Please enter the new information for the movie");
                 System.out.println("Enter a title:");
                 String title = userInput.nextLine();
 
