@@ -1,4 +1,5 @@
 package ui;
+
 import domain_model.*;
 
 import java.util.ArrayList;
@@ -184,15 +185,19 @@ public class UserInterface {
     public void removeMovieFromList() {
         ArrayList<Movie> tempMovieList = new ArrayList<>();
         String titleToSearchFor = userInput.nextLine();
+
+        Movie movieToRemove = null;
+
         for (Movie i : movieCollectionArr.getMovieListArr().stream().toList()) {
             if (i.getTitle().toLowerCase().contains(titleToSearchFor.toLowerCase())) {
-                movieCollectionArr.removeMovie(i);
+                movieToRemove = i;
                 System.out.println("The movie " + titleToSearchFor + " has been removed from collection");
-            } else if (i.getTitle().toLowerCase().isEmpty()) {
-                System.out.println("there is no movie on the list withe the name " + i + ".");
-            } else {
-                System.out.println("invalid input");
             }
+        }
+        if (movieToRemove != null) {
+            movieCollectionArr.removeMovie(movieToRemove);
+        } else {
+            System.out.println("there is no movie on the list withe the name " + titleToSearchFor + ".");
         }
     }
 
