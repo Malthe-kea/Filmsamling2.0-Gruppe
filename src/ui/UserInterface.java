@@ -23,7 +23,7 @@ public class UserInterface {
     public void startProgram() {
         System.out.println("*********************************");
         System.out.println("*                               *");
-        System.out.println("*   MALTHE'S MOVIE COLLECTION   *");
+        System.out.println("*            WELCOME            *");
         System.out.println("*                               *");
         System.out.println("*********************************\n");
         movieCollectionArr.menuInformation();
@@ -73,10 +73,5 @@ public class UserInterface {
             }
         }
     }
-
-
-
-
-
 }
 
