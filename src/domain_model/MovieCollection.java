@@ -3,6 +3,7 @@ package domain_model;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class MovieCollection {
 
     public ArrayList<Movie> movieListArr = new ArrayList<>();

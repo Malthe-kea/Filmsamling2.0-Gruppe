@@ -10,9 +10,9 @@ public class Movie {
     private int year;
     private int lengthInMinutes;
     private Boolean isInColor;
-    private String movieID;
+    private int movieID;
 
-    public Movie(String title, String director, String genre, int year, int lengthInMinutes, boolean isInColor, String movieID) {
+    public Movie(String title, String director, String genre, int year, int lengthInMinutes, boolean isInColor, int movieID) {
         this.title = title;
         this.director = director;
         this.genre = genre;
@@ -71,11 +71,11 @@ public class Movie {
         isInColor = inColor;
     }
 
-    public String getMovieID() {
+    public int getMovieID() {
         return movieID;
     }
 
-    public void setMovieID(String movieID) {
+    public void setMovieID(int movieID) {
         this.movieID = movieID;
     }
 

@@ -1,5 +1,6 @@
 package ui;
 
+import datasource.FileHandler;
 import domain_model.*;
 
 import java.util.ArrayList;
@@ -10,12 +11,14 @@ public class UserInterface {
     Scanner userInput;
 
     String commandParameter;
+    FileHandler fileHandler;
 
     MovieCollection movieCollectionArr = new MovieCollection();
 
     public UserInterface() {
         userInput = new Scanner(System.in);
         userInput.useDelimiter("\n");
+        fileHandler = new FileHandler();
     }
 
     public void startProgram() {
@@ -31,8 +34,8 @@ public class UserInterface {
 
             switch (command) {
                 case "1" -> {
-                    movieCollectionArr.addMovie(new Movie("Die Hard", "Malthe Bay", "Action", 1990, 190, true, "5"));
-                    //createAndAddMovieToMovieList();
+                    movieCollectionArr.addMovie(new Movie("Die Hard", "Malthe Bay", "Action", 1990, 190, true, 5));
+                    createAndAddMovieToMovieList();
 
                 }
                 case "2" -> {
@@ -107,10 +110,11 @@ public class UserInterface {
         }
 
         System.out.println("Enter a unique movie ID");
-        String movieID = userInput.next();
+        int movieID = userInput.nextInt();
 
         Movie movie = new Movie(title, director, genre, year, lenghtInMinute, isInColor, movieID);
         movieCollectionArr.addMovie(movie);
+        fileHandler.writeFile(movieCollectionArr.getMovieListArr());
         System.out.println("The movie has been added you your filmlist");
     }
 
@@ -124,12 +128,12 @@ public class UserInterface {
     }
 
     public void editMovieFromMovielist() {
-        String searchNumber = userInput.nextLine();
+        int searchNumber = userInput.nextInt();
 
         for (Movie m : movieCollectionArr.getMovieListArr()) {
             if (movieCollectionArr.getMovieListArr().isEmpty()) {
                 noMoviesOnList();
-            } else if (m.getMovieID().contains(searchNumber)) {
+            } else if (m.getMovieID() == searchNumber) {
                 System.out.println("domain_model.Movie found! Please enter the new information for the movie");
                 System.out.println("Enter a title:");
                 String title = userInput.nextLine();
