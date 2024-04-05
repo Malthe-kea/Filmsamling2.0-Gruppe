@@ -3,8 +3,6 @@ package ui;
 import datasource.FileHandler;
 import domain_model.*;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {

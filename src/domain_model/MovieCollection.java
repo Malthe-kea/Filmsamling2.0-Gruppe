@@ -1,7 +1,6 @@
 package domain_model;
 
 import datasource.FileHandler;
-import ui.UserInterface;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -131,7 +130,7 @@ FileHandler fileHandler = new FileHandler();
                 System.out.println();
                 System.out.println("Movie found! \n");
                 System.out.println(i.toString());
-            } else if (i.getTitle().toLowerCase().isEmpty()) {
+            } else if (i.getTitle().isEmpty()) {
                 System.out.println("there is no movie on the list withe the name " + i + ".");
             } else {
                 System.out.println("Invalid input");
@@ -139,7 +138,6 @@ FileHandler fileHandler = new FileHandler();
         }
     }
     public void removeMovieFromList() {
-        ArrayList<Movie> tempMovieList = new ArrayList<>();
         String titleToSearchFor = userInput.nextLine();
 
         Movie movieToRemove = null;
