@@ -2,7 +2,7 @@ package domain_model;
 
 import java.util.List;
 
-public class Movie {
+public class Movie implements Comparable<Movie> {
 
     private String title;
     private String director;
@@ -87,14 +87,16 @@ public class Movie {
                 "Year: " + year,
                 "Length: " + lengthInMinutes,
                 "Genre: " + genre,
-                "domain_model.Movie ID: " + movieID,
-                "Is in color: "));
+                "Movie ID: " + movieID,
+                "Is in color: " + (isInColor ? "Ja " : "Nej ")));
 
-        if (isInColor) {
-            film += "Ja";
-        } else {
-            film += "Nej";
-        }
         return film + "\n";
+    }
+
+    @Override
+    public int compareTo(Movie o) {
+        return 0;
+
+
     }
 }

@@ -12,7 +12,7 @@ Scanner userInput = new Scanner(System.in);
 
 FileHandler fileHandler = new FileHandler();
 
-    public ArrayList<Movie> movieListArr = new ArrayList<>();
+    private ArrayList<Movie> movieListArr = new ArrayList<>();
 
     public void addMovie (Movie movie) {
         movieListArr.add(movie);
