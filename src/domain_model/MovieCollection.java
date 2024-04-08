@@ -71,7 +71,7 @@ FileHandler fileHandler = new FileHandler();
                 noMoviesOnList();
             } else if (m.getMovieID() == searchNumber) {
                 userInput.nextLine();
-                System.out.println("domain_model.Movie found! Please enter the new information for the movie");
+                System.out.println("Movie found! Please enter the new information for the movie");
                 System.out.println("Enter a title:");
                 String title = userInput.nextLine();
 
@@ -110,7 +110,7 @@ FileHandler fileHandler = new FileHandler();
     public void noMoviesOnList() {
         System.out.println("there are no movies on the list");
         System.out.println("\n");
-        menuInformation();
+
     }
 
     public void getListOfMovies() {
@@ -154,16 +154,7 @@ FileHandler fileHandler = new FileHandler();
             System.out.println("there is no movie on the list withe the name " + titleToSearchFor + ".");
         }
     }
-    public void menuInformation() {
-        System.out.println("You now have the following options");
-        System.out.println("Press 1 - Add movie to your collection");
-        System.out.println("Press 2 - See movie collection");
-        System.out.println("Press 3 - Edit movie from collection");
-        System.out.println("Press 4 - Search for movie from collection");
-        System.out.println("press 5 - Remove a title from collection");
-        System.out.println("Press 6 - Show Menu");
-        System.out.println("Press 9 - Exit");
-    }
+
 
 
 

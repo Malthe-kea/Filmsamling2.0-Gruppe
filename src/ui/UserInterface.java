@@ -19,12 +19,12 @@ public class UserInterface {
     }
 
     public void startProgram() {
-        System.out.println("*********************************");
-        System.out.println("*                               *");
-        System.out.println("*            WELCOME            *");
-        System.out.println("*                               *");
-        System.out.println("*********************************\n");
-        movieCollectionArr.menuInformation();
+        print("*********************************");
+        print("*                               *");
+        print("*            WELCOME            *");
+        print("*                               *");
+        print("*********************************\n");
+        menuInformation();
 
         while (programIsRunning) {
             String command = userInput.nextLine().toLowerCase();
@@ -36,40 +36,56 @@ public class UserInterface {
 
                 }
                 case "2" -> {
-                    System.out.println("Here is a list of alle the movies in the collection:");
+                    print("Here is a list of alle the movies in the collection:");
                     movieCollectionArr.getListOfMovies();
 
                 }
                 case "3" -> {
-                    System.out.println("write the ID of the movie you would like to edit");
+                    print("write the ID of the movie you would like to edit");
                     movieCollectionArr.editMovieFromMovielist();
 
                 }
                 case "4" -> {
-                    System.out.println("please enter the title of the movie you are looking for.");
+                    print("please enter the title of the movie you are looking for.");
                     movieCollectionArr.searchMovieOnList();
 
                 }
                 case "5" -> {
-                    System.out.println("please enter the title of the movie you will like to remove.");
+                    print("please enter the title of the movie you will like to remove.");
                     movieCollectionArr.removeMovieFromList();
-                    movieCollectionArr.menuInformation();
                 }
                 case "6" -> {
-                    movieCollectionArr.menuInformation();
+                    menuInformation();
 
                 }
                 case "9" -> {
-                    System.out.println("goodbye");
+                    print("goodbye");
                     programIsRunning = false;
                     System.exit(0);
                 }
                 default -> {
-                    System.out.println("Wrong information, try again");
-                    movieCollectionArr.menuInformation();
+                    print("Wrong information, try again");
+                    menuInformation();
                 }
             }
         }
+    }
+
+    private void menuInformation() {
+        print("""
+                You now have the following options
+                Press 1 - Add movie to your collection
+                Press 2 - See movie collection
+                Press 3 - Edit movie from collection
+                Press 4 - Search for movie from collection
+                press 5 - Remove a title from collection
+                Press 6 - Show Menu
+                Press 9 - Exit
+                """);
+    }
+
+    private void print(String s) {
+        System.out.println(s);
     }
 }
 
