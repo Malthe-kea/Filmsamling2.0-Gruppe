@@ -54,7 +54,8 @@ public class UserInterface {
                 }
                 case "5" -> {
                     print("please enter the title of the movie you will like to remove.");
-                    movieCollectionArr.removeMovieFromList();
+                    String searchWord = userInput.nextLine();
+                    print(movieCollectionArr.removeMovieFromList(searchWord));
                 }
                 case "6" -> {
                     menuInformation();

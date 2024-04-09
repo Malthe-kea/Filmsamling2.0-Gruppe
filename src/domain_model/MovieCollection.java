@@ -137,21 +137,19 @@ public class MovieCollection {
         return null;
     }
 
-    public void removeMovieFromList() {
-        String titleToSearchFor = userInput.nextLine();
-
+    public String removeMovieFromList(String titleToSearchFor) {
         Movie movieToRemove = null;
 
         for (Movie i : getMovieListArr().stream().toList()) {
             if (i.getTitle().toLowerCase().contains(titleToSearchFor.toLowerCase())) {
                 movieToRemove = i;
-                System.out.println("The movie " + titleToSearchFor + " has been removed from collection");
             }
         }
         if (movieToRemove != null) {
             removeMovie(movieToRemove);
+            return "The movie " + titleToSearchFor + " has been removed from collection";
         } else {
-            System.out.println("there is no movie on the list withe the name " + titleToSearchFor + ".");
+            return "there is no movie on the list withe the name " + titleToSearchFor + ".";
         }
     }
 
