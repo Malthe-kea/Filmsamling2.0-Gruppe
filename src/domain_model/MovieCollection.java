@@ -6,21 +6,21 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 
-
 public class MovieCollection {
-Scanner userInput = new Scanner(System.in);
+    Scanner userInput = new Scanner(System.in);
 
-FileHandler fileHandler = new FileHandler();
+    FileHandler fileHandler = new FileHandler();
 
     private ArrayList<Movie> movieListArr = new ArrayList<>();
 
-    public void addMovie (Movie movie) {
+    public void addMovie(Movie movie) {
         movieListArr.add(movie);
     }
 
     public ArrayList<Movie> getMovieListArr() {
         return movieListArr;
     }
+
     public void removeMovie(Movie movie) {
         movieListArr.remove(movie);
     }
@@ -101,42 +101,42 @@ FileHandler fileHandler = new FileHandler();
                 currentMovie.setLengthInMinutes(lenghtInMinutes);
                 currentMovie.setInColor(isInColor);
 
-                System.out.println("The movie " + m.getTitle() +" has been edited.");
+                System.out.println("The movie " + m.getTitle() + " has been edited.");
             } else {
                 System.out.println("No movie with the ID " + searchNumber + " found");
             }
         }
     }
-    public void noMoviesOnList() {
-        System.out.println("there are no movies on the list");
-        System.out.println("\n");
 
+    public String noMoviesOnList() {
+        String noMovie;
+        return noMovie = "No movies on list";
     }
 
-    public void getListOfMovies() {
+    public String getListOfMovies() {
         if (movieListArr.isEmpty()) {
-            noMoviesOnList();
+            return noMoviesOnList();
         } else {
-            System.out.println(movieListArr.toString());
+            return movieListArr.toString();
         }
     }
-    public void searchMovieOnList() {
+
+    public String searchMovieOnList(String titleToSearchFor) {
         ArrayList<Movie> tempMovieList = new ArrayList<>();
-        String titleToSearchFor = userInput.nextLine();
 
         for (Movie i : getMovieListArr()) {
             if (i.getTitle().toLowerCase().contains(titleToSearchFor.toLowerCase())) {
                 tempMovieList.add(i);
-                System.out.println();
-                System.out.println("Movie found! \n");
-                System.out.println(i.toString());
+                return "Movie found\n" + i.getTitle();
             } else if (i.getTitle().isEmpty()) {
-                System.out.println("there is no movie on the list withe the name " + i + ".");
+                return "there is no movie on the list withe the name " + i + ".";
             } else {
-                System.out.println("Invalid input");
+                return "Invalid input";
             }
         }
+        return null;
     }
+
     public void removeMovieFromList() {
         String titleToSearchFor = userInput.nextLine();
 
@@ -154,8 +154,6 @@ FileHandler fileHandler = new FileHandler();
             System.out.println("there is no movie on the list withe the name " + titleToSearchFor + ".");
         }
     }
-
-
 
 
 }

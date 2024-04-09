@@ -37,7 +37,7 @@ public class UserInterface {
                 }
                 case "2" -> {
                     print("Here is a list of alle the movies in the collection:");
-                    movieCollectionArr.getListOfMovies();
+                    print(movieCollectionArr.getListOfMovies());
 
                 }
                 case "3" -> {
@@ -47,7 +47,9 @@ public class UserInterface {
                 }
                 case "4" -> {
                     print("please enter the title of the movie you are looking for.");
-                    movieCollectionArr.searchMovieOnList();
+                    String searchWord = userInput.nextLine();
+                    print(movieCollectionArr.searchMovieOnList(searchWord));
+
 
                 }
                 case "5" -> {
