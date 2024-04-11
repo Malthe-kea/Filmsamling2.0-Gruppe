@@ -118,6 +118,13 @@ public class UserInterface {
                     System.exit(0);
 
                 }
+                case "10" ->{
+                    Comparator<Movie> sortOption = movieCollectionArr.getSortOption(userInput.nextInt());
+                    movieCollectionArr.getMovieListArr().sort( sortOption);
+                    for (Movie movie : movieCollectionArr.getMovieListArr()) {
+                        System.out.println(movie.toString());
+                    }
+                }
 
                 default -> {
                     print("Wrong information, try again");
@@ -138,6 +145,7 @@ public class UserInterface {
                 press 6 - Sort by...
                 Press 7 - Show Menu
                 Press 9 - Exit
+                Press 10 - Sort by primary and secondary attribute
                 """);
     }
 
@@ -155,5 +163,6 @@ public class UserInterface {
     private void print(String s) {
         System.out.println(s);
     }
+
 }
 
