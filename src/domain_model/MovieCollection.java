@@ -29,7 +29,7 @@ public class MovieCollection {
         this.movieListArr = movieListArr;
     }
 
-    public void createAndAddMovieToMovieList() {
+    public String createAndAddMovieToMovieList() {
         userInput.useDelimiter("\n");
         System.out.println("Enter a title:");
         String title = userInput.nextLine();
@@ -59,8 +59,10 @@ public class MovieCollection {
         Movie movie = new Movie(title, director, genre, year, lenghtInMinute, isInColor, movieID);
         addMovie(movie);
         fileHandler.writeFile(getMovieListArr());
-        System.out.println("The movie has been added you your filmlist");
+        return "The movie has been added you your filmlist";
+
     }
+
 
     public void editMovieFromMovielist() {
         userInput.useDelimiter("\n");

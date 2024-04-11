@@ -61,7 +61,54 @@ public class UserInterface {
                     String searchWord = userInput.nextLine();
                     print(movieCollectionArr.removeMovieFromList(searchWord));
                 }
+
                 case "6" -> {
+                    sortMenuInformation();
+                    String commandSort = userInput.nextLine().toLowerCase();
+                    switch (commandSort) {
+                        case "1" -> {
+                            movieCollectionArr.getMovieListArr().sort(new TitleComparator());
+                            for (Movie movie : movieCollectionArr.getMovieListArr()) {
+                                System.out.println(movie.toString());
+                            }
+                        }
+                        case "2" -> {
+                            movieCollectionArr.getMovieListArr().sort(new DirectorComparator());
+                            for (Movie movie : movieCollectionArr.getMovieListArr()) {
+                                System.out.println(movie.toString());
+                            }
+                        }
+                        case "3" -> {
+                            movieCollectionArr.getMovieListArr().sort(new GenreComparator());
+                            for (Movie movie : movieCollectionArr.getMovieListArr()) {
+                                System.out.println(movie.toString());
+                            }
+
+                        }
+                        case "4" -> {
+                            movieCollectionArr.getMovieListArr().sort(new YearComparator());
+                            for (Movie movie : movieCollectionArr.getMovieListArr()) {
+                                System.out.println(movie.toString());
+                            }
+                        }
+                        case "5" -> {
+                            movieCollectionArr.getMovieListArr().sort(new LengthInMinutesComparator());
+                            for (Movie movie : movieCollectionArr.getMovieListArr()) {
+                                System.out.println(movie.toString());
+                            }
+                        }
+                        case "6" -> {
+                            movieCollectionArr.getMovieListArr().sort(new ColorComparator());
+                            for (Movie movie : movieCollectionArr.getMovieListArr()) {
+                                System.out.println(movie.toString());
+                            }
+                        }
+                        default -> {
+                            System.out.println("No movies on list");
+                        }
+                    }
+                }
+                case "7" -> {
                     menuInformation();
 
                 }
@@ -71,49 +118,7 @@ public class UserInterface {
                     System.exit(0);
 
                 }
-                //TODO lav switch case med ny menu til sortering
-                case "10" -> {
-                    movieCollectionArr.getMovieListArr().sort(new TitleComparator());
-                    for (Movie movie : movieCollectionArr.getMovieListArr()) {
-                        System.out.println(movie.toString());
-                    }
 
-                }
-                case "11" -> {
-                    movieCollectionArr.getMovieListArr().sort(new DirectorComparator());
-                    for (Movie movie : movieCollectionArr.getMovieListArr()) {
-                        System.out.println(movie.toString());
-                    }
-
-                }
-                case "12" -> {
-                    movieCollectionArr.getMovieListArr().sort(new GenreComparator());
-                    for (Movie movie : movieCollectionArr.getMovieListArr()) {
-                        System.out.println(movie.toString());
-                    }
-
-                }
-                case "13" -> {
-                    movieCollectionArr.getMovieListArr().sort(new YearComparator());
-                    for (Movie movie : movieCollectionArr.getMovieListArr()) {
-                        System.out.println(movie.toString());
-                    }
-
-                }
-                case "14" -> {
-                    movieCollectionArr.getMovieListArr().sort(new LengthInMinutesComparator());
-                    for (Movie movie : movieCollectionArr.getMovieListArr()) {
-                        System.out.println(movie.toString());
-                    }
-
-                }
-                case "15" -> {
-                    movieCollectionArr.getMovieListArr().sort(new ColorComparator());
-                    for (Movie movie : movieCollectionArr.getMovieListArr()) {
-                        System.out.println(movie.toString());
-                    }
-
-                }
                 default -> {
                     print("Wrong information, try again");
                     menuInformation();
@@ -130,14 +135,20 @@ public class UserInterface {
                 Press 3 - Edit movie from collection
                 Press 4 - Search for movie from collection
                 press 5 - Remove a title from collection
-                Press 6 - Show Menu
+                press 6 - Sort by...
+                Press 7 - Show Menu
                 Press 9 - Exit
-                Press 10 - Sort movies by title
-                Press 11 - Sort movies by director
-                Press 12 - Sort movies by genre
-                Press 13 - Sort movies by year
-                Press 14 - Sort movies by length in minutes
-                Press 15 - Sort movies by color
+                """);
+    }
+
+    private void sortMenuInformation() {
+        print("""
+                Press 1 - Sort movies by title
+                Press 2 - Sort movies by director
+                Press 3 - Sort movies by genre
+                Press 4 - Sort movies by year
+                Press 5 - Sort movies by length in minutes
+                Press 6 - Sort movies by color
                 """);
     }
 
