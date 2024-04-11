@@ -118,10 +118,15 @@ public class UserInterface {
                     System.exit(0);
 
                 }
-                case "10" ->{
-                    Comparator<Movie> sortOption = movieCollectionArr.getSortOption(userInput.nextInt());
-                    movieCollectionArr.getMovieListArr().sort( sortOption);
-                    for (Movie movie : movieCollectionArr.getMovieListArr()) {
+                case "10" -> {
+                    getPrimarySortOptionMenuText();
+                    String primary = userInput.nextLine().toLowerCase();
+                    getSecondarySortOptionMenuText();
+                    String secondary = userInput.nextLine().toLowerCase();
+
+                    movieCollectionArr.getSortOption(primary, secondary);
+                    movieCollectionArr.getMovieListArr().sort( );
+                    for (Movie movie : movieCollectionArr.getMovieListArr() {
                         System.out.println(movie.toString());
                     }
                 }
@@ -162,6 +167,24 @@ public class UserInterface {
 
     private void print(String s) {
         System.out.println(s);
+    }
+
+    private void getPrimarySortOptionMenuText() {
+        System.out.println("Select primary attribute to sort by: ");
+        System.out.println("1 - sort by title");
+        System.out.println("2 - sort by director");
+        System.out.println("3 - sort by genre");
+        System.out.println("4 - sort by year");
+        System.out.println("5 - sort by length in minutes");
+        System.out.println("6 - sort by color");
+    }    private void getSecondarySortOptionMenuText() {
+        System.out.println("Select primary attribute to sort by: ");
+        System.out.println("1 - sort by title");
+        System.out.println("2 - sort by director");
+        System.out.println("3 - sort by genre");
+        System.out.println("4 - sort by year");
+        System.out.println("5 - sort by length in minutes");
+        System.out.println("6 - sort by color");
     }
 
 }

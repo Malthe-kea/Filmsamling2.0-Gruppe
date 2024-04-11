@@ -157,34 +157,11 @@ public class MovieCollection {
     }
 
 
-    public Comparator<Movie> getSortOption(int attribute) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Select primary attribute to sort by: ");
-        System.out.println("1 - sort by title");
-        System.out.println("2 - sort by director");
-        System.out.println("3 - sort by genre");
-        System.out.println("4 - sort by year");
-        System.out.println("5 - sort by length in minutes");
-        System.out.println("6 - sort by color");
+    public Comparator<Movie> getSortOption(String primary, String secondary) {
 
-        int primary = scanner.nextInt();
-
-        System.out.println("Select a secondary attribute to sort by: ");
-        System.out.println("1 - sort by title");
-        System.out.println("2 - sort by director");
-        System.out.println("3 - sort by genre");
-        System.out.println("4 - sort by year");
-        System.out.println("5 - sort by length in minutes");
-        System.out.println("6 - sort by color");
-
-        int secondary = scanner.nextInt();
-
-        Comparator<Movie> primaryComparator = getSortOption(primary);
-        Comparator<Movie> secondaryComparator = getSortOption(secondary);
+        Comparator<Movie> primary;
+        Comparator<Movie> secondary;
 
         return primaryComparator.thenComparing(secondaryComparator);
-
-
     }
-
 }
