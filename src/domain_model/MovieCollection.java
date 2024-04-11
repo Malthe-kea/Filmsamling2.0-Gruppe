@@ -2,10 +2,7 @@ package domain_model;
 
 import datasource.FileHandler;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 
 
 public class MovieCollection {
@@ -13,11 +10,12 @@ public class MovieCollection {
 
     FileHandler fileHandler = new FileHandler();
 
-    private ArrayList<Movie> movieListArr = new ArrayList<>();
+    private ArrayList<Movie> movieListArr;
 
     private HashMap<Integer, Comparator<Movie>> comparatorHashMap;
 
     public MovieCollection() {
+        movieListArr = fileHandler.readFile();
         comparatorHashMap = new HashMap<>();
         comparatorHashMap.put(1, new TitleComparator());
         comparatorHashMap.put(2, new DirectorComparator());
@@ -25,145 +23,166 @@ public class MovieCollection {
         comparatorHashMap.put(4, new YearComparator());
         comparatorHashMap.put(5, new LengthInMinutesComparator());
         comparatorHashMap.put(6, new ColorComparator());
+
     }
 
-    public void addMovie(Movie movie) {
-        movieListArr.add(movie);
-    }
-    public ArrayList<Movie> getMovieListArr() {
-        return movieListArr;
-    }
-    public void removeMovie(Movie movie) {
+    private void removeMovie(Movie movie) {
         movieListArr.remove(movie);
     }
-    public void setMovieListArr(ArrayList movieListArr) {
-        this.movieListArr = movieListArr;
-    }
-    public String createAndAddMovieToMovieList() {
-        userInput.useDelimiter("\n");
-        System.out.println("Enter a title:");
-        String title = userInput.nextLine();
 
-        System.out.println("Enter a director:");
-        String director = userInput.nextLine();
-
-        System.out.println("Enter a genre:");
-        String genre = userInput.nextLine();
-
-        System.out.println("Enter the year the movie was created:");
-        int year = userInput.nextInt();
-
-        System.out.println("Enter the length in minutes:");
-        int lenghtInMinute = userInput.nextInt();
-
-        System.out.println("Is the movie in color? yes/no");
-        boolean isInColor = false;
-        String colorOrNot = userInput.next().toLowerCase();
-        if (colorOrNot.equals("yes")) {
-            isInColor = true;
+    public String createAndAddMovieToMovieList(String title, String director, String genre, int year, int lengthInMinutes, boolean isInColor) {
+        int movieID = 1;
+        if (!movieListArr.isEmpty()) {
+            movieID = movieListArr.get(movieListArr.size() - 1).getMovieID() + 1;
         }
+        movieListArr.add(new Movie(title, director, genre, year, lengthInMinutes, isInColor, movieID));
+        fileHandler.writeFile(movieListArr);
 
-        System.out.println("Enter a unique movie ID");
-        int movieID = userInput.nextInt();
-
-        Movie movie = new Movie(title, director, genre, year, lenghtInMinute, isInColor, movieID);
-        addMovie(movie);
-        fileHandler.writeFile(getMovieListArr());
-        return "The movie has been added you your filmlist";
-
+        return title + " was successfully added to the movie collection!";
     }
 
 
-    public void editMovieFromMovielist() {
-        userInput.useDelimiter("\n");
-        int searchNumber = userInput.nextInt();
+    public String editMovieFromMovielist(int idToEdit, String editString, int editIndex) {
+        Movie movietoEdit = null;
 
-        for (Movie m : getMovieListArr()) {
-            if (getMovieListArr().isEmpty()) {
-                noMoviesOnList();
-            } else if (m.getMovieID() == searchNumber) {
-                userInput.nextLine();
-                System.out.println("Movie found! Please enter the new information for the movie");
-                System.out.println("Enter a title:");
-                String title = userInput.nextLine();
-
-                System.out.println("Enter a director:");
-                String director = userInput.nextLine();
-
-                System.out.println("Enter a genre:");
-                String genre = userInput.nextLine();
-
-                System.out.println("Enter the year the movie was created:");
-                int year = userInput.nextInt();
-
-                System.out.println("Enter the length in minutes:");
-                int lenghtInMinutes = userInput.nextInt();
-
-                System.out.println("Is the movie in color? yes/no");
-                boolean isInColor = false;
-                String colorOrNot = userInput.next().toLowerCase();
-                if (colorOrNot.equals("yes")) {
-                    isInColor = true;
-                }
-                Movie currentMovie = m;
-                currentMovie.setTitle(title);
-                currentMovie.setDirector(director);
-                currentMovie.setGenre(genre);
-                currentMovie.setYear(year);
-                currentMovie.setLengthInMinutes(lenghtInMinutes);
-                currentMovie.setInColor(isInColor);
-
-                System.out.println("The movie " + m.getTitle() + " has been edited.");
-            } else {
-                System.out.println("No movie with the ID " + searchNumber + " found");
+        for(Movie m : movieListArr) {
+            if(m.getMovieID() == idToEdit) {
+                movietoEdit = m;
+                break;
             }
         }
+
+        switch (editIndex) {
+            case 1 -> {
+                movietoEdit.setTitle(editString);
+            }
+            case 2 -> {
+                movietoEdit.setDirector(editString);
+            }
+            case 3 -> {
+                movietoEdit.setGenre(editString);
+            }
+            case 4 -> {
+                try {
+                    movietoEdit.setYear(Integer.parseInt(editString));
+                } catch (RuntimeException re) {
+                    return "Not a valid input. Please input a number.";
+                }
+
+            }
+            case 5 -> {
+                try {
+                    movietoEdit.setLengthInMinutes(Integer.parseInt(editString));
+                } catch (RuntimeException re) {
+                    return "Not a valid input. Please input a number.";
+                }
+            }
+            case 6 -> {
+                boolean isInColor = !editString.equals("no");
+                movietoEdit.setInColor(isInColor);
+            }
+            default -> {
+                return "Error - Edit not applicable with index ID.";
+            }
+        }
+        fileHandler.writeFile(movieListArr);
+        return "The movie was successfully edited!";
     }
 
-    public String noMoviesOnList() {
-        String noMovie;
-        return noMovie = "No movies on list";
+    private String noMoviesOnList() {
+        return "No movies on list";
     }
 
     public String getListOfMovies() {
         if (movieListArr.isEmpty()) {
             return noMoviesOnList();
         } else {
-            return movieListArr.toString();
+            StringBuilder listString = new StringBuilder();
+            for (Movie m : movieListArr) {
+                listString.append(m.toString() + "\n");
+            }
+
+            return listString.toString();
         }
     }
 
-    public String searchMovieOnList(String titleToSearchFor) {
-        ArrayList<Movie> tempMovieList = new ArrayList<>();
+    public String searchMovieOnList(String stringToSearchFor, int i) {
+        ArrayList<Movie> searchResults = searchList(stringToSearchFor, i);
 
-        for (Movie i : getMovieListArr()) {
-            if (i.getTitle().toLowerCase().contains(titleToSearchFor.toLowerCase())) {
-                tempMovieList.add(i);
-                return "Movie found\n" + i.getTitle();
-            } else if (i.getTitle().isEmpty()) {
-                return "there is no movie on the list withe the name " + i + ".";
-            } else {
-                return "Invalid input";
+        if(searchResults.isEmpty()) {
+            return "false";
+        }
+        StringBuilder searchedMovieList = new StringBuilder();
+        for (Movie m : searchResults) {
+            searchedMovieList.append(m.toString());
+        }
+
+        return searchedMovieList.toString();
+    }
+
+    private ArrayList<Movie> searchList(String searchAtt, int i) {
+        ArrayList<Movie> tempMovieList = new ArrayList<>();
+        for (Movie movie : movieListArr) {
+            switch(i) {
+                case 1 -> {
+                    if (movie.getTitle().toLowerCase().contains(searchAtt.toLowerCase())) {
+                        tempMovieList.add(movie);
+                    }
+                }
+                case 2 -> {
+                    if (movie.getDirector().toLowerCase().contains(searchAtt.toLowerCase())) {
+                        tempMovieList.add(movie);
+                    }
+                }
+                case 3 -> {
+                    if (movie.getGenre().toLowerCase().contains(searchAtt.toLowerCase())) {
+                        tempMovieList.add(movie);
+                    }
+                }
+                case 4 -> {
+                    if (movie.getYear() == Integer.parseInt(searchAtt)) {
+                        tempMovieList.add(movie);
+                    }
+                }
+                case 5 -> {
+                    if (movie.getLengthInMinutes() == Integer.parseInt(searchAtt)) {
+                        tempMovieList.add(movie);
+                    }
+                }
+                case 6 -> {
+                    boolean isInColor = !searchAtt.equalsIgnoreCase("no");
+                    if (movie.getInColor() == isInColor) {
+                        tempMovieList.add(movie);
+                    }
+                }
+                default -> {
+                    System.out.println("Error searching. Integer for setting is not between 1 and 6.");
+                }
             }
         }
-        return null;
+
+        return tempMovieList;
     }
 
-    public String removeMovieFromList(String titleToSearchFor) {
+    public String removeMovieFromList(int movieIdToRemove) {
         Movie movieToRemove = null;
 
-        for (Movie i : getMovieListArr().stream().toList()) {
-            if (i.getTitle().toLowerCase().contains(titleToSearchFor.toLowerCase())) {
-                movieToRemove = i;
+        for(Movie m : movieListArr) {
+            if(m.getMovieID() == movieIdToRemove) {
+                movieToRemove = m;
+                break;
             }
         }
+
         if (movieToRemove != null) {
             removeMovie(movieToRemove);
-            return "The movie " + titleToSearchFor + " has been removed from collection";
+            fileHandler.writeFile(movieListArr);
+            return "The movie with id" + movieIdToRemove + " has been removed from collection";
         } else {
-            return "there is no movie on the list withe the name " + titleToSearchFor + ".";
+            return "there is no movie on the list with the id " + movieIdToRemove + ".";
         }
     }
+
 
     public String SortMovieList(int primary, int secondary) {
         movieListArr.sort(comparatorHashMap.get(primary).thenComparing(comparatorHashMap.get(secondary)));

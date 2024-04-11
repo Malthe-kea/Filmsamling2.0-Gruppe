@@ -2,7 +2,7 @@ package domain_model;
 
 import java.util.List;
 
-public class Movie implements Comparable<Movie> {
+public class Movie {
 
     private String title;
     private String director;
@@ -93,10 +93,4 @@ public class Movie implements Comparable<Movie> {
         return film + "\n";
     }
 
-    @Override
-    public int compareTo(Movie o) {
-        return 0;
-
-
-    }
 }
