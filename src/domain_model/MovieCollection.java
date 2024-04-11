@@ -3,6 +3,7 @@ package domain_model;
 import datasource.FileHandler;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -13,6 +14,25 @@ public class MovieCollection {
     FileHandler fileHandler = new FileHandler();
 
     private ArrayList<Movie> movieListArr = new ArrayList<>();
+
+    private HashMap<Integer, Comparator<Movie>> comparatorHashMap;
+
+    public MovieCollection() {
+        comparatorHashMap = new HashMap<>();
+        comparatorHashMap.put(1, new TitleComparator());
+        comparatorHashMap.put(2, new DirectorComparator());
+        comparatorHashMap.put(3, new GenreComparator());
+        comparatorHashMap.put(4, new YearComparator());
+        comparatorHashMap.put(5, new LengthInMinutesComparator());
+        comparatorHashMap.put(6, new ColorComparator());
+
+        /*Press 1 - Sort movies by title
+        Press 2 - Sort movies by director
+        Press 3 - Sort movies by genre
+        Press 4 - Sort movies by year
+        Press 5 - Sort movies by length in minutes
+        Press 6 - Sort movies by color*/
+    }
 
     public void addMovie(Movie movie) {
         movieListArr.add(movie);
@@ -157,11 +177,8 @@ public class MovieCollection {
     }
 
 
-    public Comparator<Movie> getSortOption(String primary, String secondary) {
-
-        Comparator<Movie> primary;
-        Comparator<Movie> secondary;
-
-        return primaryComparator.thenComparing(secondaryComparator);
+    public String SortMovieList(int primary, int secondary) {
+        movieListArr.sort(comparatorHashMap.get(primary).thenComparing(comparatorHashMap.get(secondary)));
+        return getListOfMovies();
     }
 }

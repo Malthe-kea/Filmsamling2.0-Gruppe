@@ -5,6 +5,7 @@ import domain_model.*;
 
 import java.util.Comparator;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -63,7 +64,7 @@ public class UserInterface {
                 }
 
                 case "6" -> {
-                    sortMenuInformation();
+                    sortMenuInformation("primary");
                     String commandSort = userInput.nextLine().toLowerCase();
                     switch (commandSort) {
                         case "1" -> {
@@ -119,16 +120,23 @@ public class UserInterface {
 
                 }
                 case "10" -> {
-                    getPrimarySortOptionMenuText();
-                    String primary = userInput.nextLine().toLowerCase();
-                    getSecondarySortOptionMenuText();
-                    String secondary = userInput.nextLine().toLowerCase();
+                    int primary = 0;
+                    int secondary = 0;
 
-                    movieCollectionArr.getSortOption(primary, secondary);
-                    movieCollectionArr.getMovieListArr().sort( );
-                    for (Movie movie : movieCollectionArr.getMovieListArr() {
-                        System.out.println(movie.toString());
-                    }
+                    do {
+                        try {
+                            sortMenuInformation("primary");
+                            primary = userInput.nextInt();
+                            sortMenuInformation("secondary");
+                            secondary = userInput.nextInt();
+                        } catch(InputMismatchException ime) {
+                            print("You need to input a valid number");
+                        }
+                    } while((primary < 1 || primary > 6) || (secondary < 1 || secondary > 6));
+
+
+                   print(movieCollectionArr.SortMovieList(primary,secondary));
+
                 }
 
                 default -> {
@@ -154,15 +162,16 @@ public class UserInterface {
                 """);
     }
 
-    private void sortMenuInformation() {
-        print("""
+    private void sortMenuInformation(String s) {
+        System.out.printf("""
+                Select %s attribute to sort by: 
                 Press 1 - Sort movies by title
                 Press 2 - Sort movies by director
                 Press 3 - Sort movies by genre
                 Press 4 - Sort movies by year
                 Press 5 - Sort movies by length in minutes
                 Press 6 - Sort movies by color
-                """);
+                """, s);
     }
 
     private void print(String s) {
