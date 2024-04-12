@@ -116,7 +116,6 @@ public class MovieCollection {
         for (Movie m : searchResults) {
             searchedMovieList.append(m.toString());
         }
-
         return searchedMovieList.toString();
     }
 
