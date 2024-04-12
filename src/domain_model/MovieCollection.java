@@ -6,7 +6,6 @@ import java.util.*;
 
 
 public class MovieCollection {
-    Scanner userInput = new Scanner(System.in);
 
     FileHandler fileHandler = new FileHandler();
 
@@ -102,6 +101,7 @@ public class MovieCollection {
                 listString.append(m.toString() + "\n");
             }
 
+
             return listString.toString();
         }
     }
@@ -183,8 +183,16 @@ public class MovieCollection {
     }
 
 
-    public String SortMovieList(int primary, int secondary) {
+    public String sortMovieList(int primary, int secondary) {
         movieListArr.sort(comparatorHashMap.get(primary).thenComparing(comparatorHashMap.get(secondary)));
         return getListOfMovies();
+    }
+
+    public ArrayList<Movie> getMovieListArr() {
+        return movieListArr;
+    }
+
+    public FileHandler getFileHandler() {
+        return fileHandler;
     }
 }

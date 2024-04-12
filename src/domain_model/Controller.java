@@ -1,7 +1,5 @@
 package domain_model;
 
-import java.util.ArrayList;
-
 public class Controller {
 
     MovieCollection movieCollection;
@@ -33,8 +31,8 @@ public class Controller {
     }
 
 
-    public String SortMovieList(int primary, int secondary) {
-        return movieCollection.SortMovieList(primary, secondary);
+    public String sortMovieList(int primary, int secondary) {
+        return movieCollection.sortMovieList(primary, secondary);
     }
 
 }

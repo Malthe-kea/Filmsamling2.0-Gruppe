@@ -75,10 +75,6 @@ public class Movie {
         return movieID;
     }
 
-    public void setMovieID(int movieID) {
-        this.movieID = movieID;
-    }
-
     @Override
     public String toString() {
         String film = String.join("\n", List.of(

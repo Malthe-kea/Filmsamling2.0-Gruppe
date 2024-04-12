@@ -173,13 +173,13 @@ public class UserInterface {
                 String attrContent = "";
                 while(attrToEdit != 9) {
                     print("""
-                                        Press 1 - Change the title
-                                        Press 2 - Change the name of the director
-                                        Press 3 - Change the genre
-                                        Press 4 - Change the year of the movie
-                                        Press 5 - Change the length in minutes
-                                        Press 6 - Change if the movie is in color
-                                        Press 9 - Exit editing
+                            Press 1 - Change the title
+                            Press 2 - Change the name of the director
+                            Press 3 - Change the genre
+                            Press 4 - Change the year of the movie
+                            Press 5 - Change the length in minutes
+                            Press 6 - Change if the movie is in color
+                            Press 9 - Exit editing
                                         """);
                     attrToEdit = userInput.nextInt();
                     switch (attrToEdit) {
@@ -245,7 +245,7 @@ public class UserInterface {
             }
         } while ((primary < 1 || primary > 6) || (secondary < 1 || secondary > 6));
 
-        return controller.SortMovieList(primary, secondary);
+        return controller.sortMovieList(primary, secondary);
 
     }
 
