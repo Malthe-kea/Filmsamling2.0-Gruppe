@@ -58,22 +58,7 @@ public class UserInterface {
                 }
 
                 case "6" -> {
-                    int primary = 0;
-                    int secondary = 0;
-
-                    do {
-                        try {
-                            sortMenuInformation("primary");
-                            primary = userInput.nextInt();
-                            sortMenuInformation("secondary");
-
-                            secondary = userInput.nextInt();
-                        } catch (InputMismatchException ime) {
-                            print("You need to input a valid number");
-                        }
-                    } while ((primary < 1 || primary > 6) || (secondary < 1 || secondary > 6));
-
-                    print(controller.SortMovieList(primary, secondary));
+                    print(sortMovies());
                 }
                 case "7" -> {
                     menuInformation();
@@ -244,6 +229,26 @@ public class UserInterface {
             }
 
         }
+    }
+
+    private String sortMovies() {
+        int primary = 0;
+        int secondary = 0;
+
+        do {
+            try {
+                sortMenuInformation("primary");
+                primary = userInput.nextInt();
+                sortMenuInformation("secondary");
+
+                secondary = userInput.nextInt();
+            } catch (InputMismatchException ime) {
+                print("You need to input a valid number");
+            }
+        } while ((primary < 1 || primary > 6) || (secondary < 1 || secondary > 6));
+
+        return controller.SortMovieList(primary, secondary);
+
     }
 
     private void print(String s) {
