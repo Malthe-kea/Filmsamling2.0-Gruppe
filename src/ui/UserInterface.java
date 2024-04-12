@@ -94,11 +94,9 @@ public class UserInterface {
         int lenghtInMinute = userInput.nextInt();
 
         print("Is the movie in color? yes/no");
-        boolean isInColor = false;
+
         String colorOrNot = userInput.next().toLowerCase();
-        if (colorOrNot.equals("yes")) {
-            isInColor = true;
-        }
+        boolean isInColor = !colorOrNot.equals("no");
 
         return controller.createAndAddMovieToMovieList(title, director, genre, year, lenghtInMinute, isInColor);
     }
